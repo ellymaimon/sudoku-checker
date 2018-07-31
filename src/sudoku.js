@@ -26,52 +26,39 @@ export function checkRows(userInput) {
   return true;
 }
 
-// function checkColumns(userInput) {
-//   var currentColumn = [];
-//   for (var i = 0; i <= 8; i++) {
-//     for (var j = 0; j <= 8; j++) {
-//       currentColumn.push(userInput[i + (j * 9)]);
-//       if(!checkArray(currentColumn)) return false;
-//       currentColumn = [];
-//     }
-//   }
-//   return true;
-// }
+export function checkColumns(userInput) {
+  var currentColumn = [];
+  for (var i = 0; i <= 8; i++) {
+    for (var j = 0; j <= 8; j++) {
+      currentColumn.push(userInput[i + (j * 9)]);
+    }
+    if(!checkArray(currentColumn)) return false;
+    currentColumn = [];
+  }
+  return true;
+}
 
+export function checkBoxes(userInput) {
+  var currentBox = [];
+  for (var i = 0; i <= 54; i+=27) {
+    for (var j = 0; j <= 6; j+=3) {
+      for (var k = 0; k <= 2; k++) {
+        for (var l = 0; l <=2; l++) {
+          currentBox.push(userInput[i + j + k + (l * 9)]);
+        }
+      }
+      if(!checkArray(currentBox)) return false;
+      currentBox = [];
+    }
+  }
+  return true;
+}
 
-
-//
-// array = [];
-// valid = [];
-//
-// for(i = 1; i <= 9; i++) {
-//   COLUMN.forEach(function(colbox){
-//     array.push($("#" + colbox + i).val());
-//   })
-//   array.sort();//or in the checkvalid
-// loop and check =>  array.checkValid()
-//   if(valid is true)
-//   {
-//     push 1 to validcol array
-//   }
-//   else {
-//     {
-//       push 0 to validcol array
-//     }
-//   }
-//   array.clear()
-// }
-//
-// checkFinalWiun {
-//   if valid.sum ==
-// }
-//
-//
-//
-//
-//
-// COLUMN.forEach(function(colbox)) {
-//   ROW.forEach(function(rowbox) {
-//     array.push($("#" + colbox + rowbox).val());
-//
-//   });
+CurrentGame.prototype.checkWin = function() {
+  if(checkRows(this.userInput) && checkColumns(this.userInput) && checkBoxes(this.userInput)) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
